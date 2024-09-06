@@ -98,3 +98,8 @@ body {
   padding: 10px;
   color: #ccc;
 }
+
+.error {
+  color: #ff4c4c;
+  font-weight: bold;
+}

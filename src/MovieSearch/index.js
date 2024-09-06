@@ -8,13 +8,19 @@ export default function MovieSearch() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const apiKey = process.env.REACT_APP_MOVIE_SEARCH_API_KEY;
+
   const searchMovie = async () => {
     if (!query) return;
+    if (!apiKey) {
+      setError('API key is missing');
+      return;
+    }
     try {
       setMovies([]);
       setIsLoading(true);
       setError(null);
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE_SEARCH_API_KEY}&query=${query}`;
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
       const response = await fetch(url);
       const data = await response.json();
       setMovies(data.results);
@@ -45,7 +51,7 @@ export default function MovieSearch() {
         {isLoading ? (
           <LoadingSpinner />
         ) : error ? (
-          <p>Error: {error?.message}</p>
+          <p className="error">Error: {error}</p>
         ) : (
           movies
             ?.filter((movie) => movie?.poster_path)
