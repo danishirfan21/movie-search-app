@@ -45,24 +45,24 @@ export default function MovieSearch() {
         {isLoading ? (
           <LoadingSpinner />
         ) : error ? (
-          <p>Error: {error.message}</p>
+          <p>Error: {error?.message}</p>
         ) : (
           movies
-            .filter((movie) => movie.poster_path)
-            .sort((a, b) => b.release_date.localeCompare(a.release_date))
-            .map((movie) => (
-              <div key={movie.id} className="Movie">
-                <h2>{movie.title}</h2>
+            ?.filter((movie) => movie?.poster_path)
+            ?.sort((a, b) => b?.release_date.localeCompare(a?.release_date))
+            ?.map((movie) => (
+              <div key={movie?.id} className="Movie">
+                <h2>{movie?.title}</h2>
                 <p>
                   Release Date:{' '}
-                  {new Date(movie.release_date).toLocaleDateString()}
+                  {new Date(movie?.release_date).toLocaleDateString()}
                 </p>
-                <p>Rating: {movie.vote_average.toFixed(2)}</p>
+                <p>Rating: {movie?.vote_average.toFixed(2)}</p>
                 <img
-                  src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`}
-                  alt={movie.title}
+                  src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie?.poster_path}`}
+                  alt={movie?.title}
                 />
-                <p>{movie.overview}</p>
+                <p>{movie?.overview}</p>
               </div>
             ))
         )}
